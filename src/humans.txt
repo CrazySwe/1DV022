@@ -1,0 +1,14 @@
+/* TEAM */
+Artifex: Kevin Cederholm
+Contact: kc222en[at]student.lnu.se
+Github: crazyswe
+Location: Varberg, Sweden
+
+/* THANKS */
+
+
+/* SITE */
+Last Updated: 2018/11/19
+Standards: HTML5, CSS3
+Technology: Docker, Ruby, Jekyll
+Software: Visual Studio Code
