@@ -1,18 +1,18 @@
 ---
 layout: page
-title: About
+title: Om mig
 permalink: /about/
 ---
 
-This is the base Jekyll theme. You can find out more info about customizing your Jekyll theme, as well as basic Jekyll usage documentation at [jekyllrb.com](https://jekyllrb.com/)
+Jag heter Kevin Cederholm och är 26 år ifrån Varberg på västkusten. Studerar heltid just nu på Linnéuniversitetet.
+Lever med 3 hundar och 3 katter utöver min familj.
 
-You can find the source code for Minima at GitHub:
-[jekyll][jekyll-organization] /
-[minima](https://github.com/jekyll/minima)
-
-You can find the source code for Jekyll at GitHub:
-[jekyll][jekyll-organization] /
-[jekyll](https://github.com/jekyll/jekyll)
+## Intressen ##
+Mina största intressen är programmering, film, spel.
 
 
-[jekyll-organization]: https://github.com/jekyll
+## Vad jag kan ##
+Läst CCNA R&S, CCNP R&S, TSHOOT och CCNA Security på Halmstad högskola.
+Programmerat mycket innan men känner det vore kul att utveckla det mer.
+
+Har jobbat flera olika jobb och känner att i framtiden kanske jag vill starta eget.
