@@ -4,15 +4,22 @@
   {%- include head.html -%}
 
   <body>
-
+    
     {%- include header.html -%}
-
+    
+    {%- if page.layout == 'home' -%}
+    <div id="home-wrapper">
+      <div id="home-box" class="wrapper">
+        {{ content }}
+      </div>
+    </div>
+    {%- else -%}
     <main class="page-content" aria-label="Content">
       <div class="wrapper">
         {{ content }}
-      </div>
+      </div>    
     </main>
-
+    {%- endif -%}
     {%- include footer.html -%}
 
   </body>

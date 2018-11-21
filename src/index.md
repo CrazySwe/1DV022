@@ -4,6 +4,5 @@
 
 layout: home
 ---
-
-
-Göra om denna sidan till något finare..
+# Kevin Cederholm #
+## HTML ▲ CSS ▲ Sass ▲ Jekyll ▲ Javascript ##
