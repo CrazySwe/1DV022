@@ -5,4 +5,4 @@
 layout: home
 ---
 # Kevin Cederholm #
-## HTML ▲ CSS ▲ Sass ▲ Jekyll ▲ Javascript ##
+## HTML ▲ SCSS ▲ Markdown ▲ Jekyll ##

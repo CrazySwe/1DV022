@@ -10,9 +10,8 @@ Lever med 3 hundar och 3 katter utöver min familj.
 ## Intressen ##
 Mina största intressen är programmering, film, spel.
 
-
 ## Vad jag kan ##
 Läst CCNA R&S, CCNP R&S, TSHOOT och CCNA Security på Halmstad högskola.
 Programmerat mycket innan men känner det vore kul att utveckla det mer.
 
-Har jobbat flera olika jobb och känner att i framtiden kanske jag vill starta eget.
+Har jobbat flera olika jobb från lager till IT-tekniker och känner att i framtiden vill jag starta och skapa något eget.
