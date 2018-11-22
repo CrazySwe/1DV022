@@ -11,7 +11,13 @@ export function exercise2 () {
   myElmt.appendChild(myH2)
 }
 // 03
-export function exercise3 () {}
+export function exercise3 () {
+  let myH2 = document.createElement('h2')
+  myH2.innerHTML = 'This is a sub headline'
+  let elements = document.querySelectorAll('h2')
+  let parent = elements[4].parentElement
+  parent.insertBefore(myH2, parent.lastElementChild)
+}
 // 04
 export function exercise4 () {}
 // 05
