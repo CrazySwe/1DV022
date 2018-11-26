@@ -6,9 +6,9 @@ export function exercise1 () {
 // 02
 export function exercise2 () {
   let myH2 = document.createElement('h2')
-  let myElmt = document.querySelector('#step02')
+  let myElmement = document.querySelector('#step02')
   myH2.innerHTML = 'This is a sub headline'
-  myElmt.appendChild(myH2)
+  myElmement.appendChild(myH2)
 }
 // 03
 export function exercise3 () {
@@ -19,7 +19,10 @@ export function exercise3 () {
   parent.insertBefore(myH2, parent.lastElementChild)
 }
 // 04
-export function exercise4 () {}
+export function exercise4 () {
+  let myElement = document.querySelector('#step04 h2')
+  myElement.classList.add('red')
+}
 // 05
 export function exercise5 () {}
 // 06
