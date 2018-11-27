@@ -24,7 +24,15 @@ export function exercise4 () {
   myElement.classList.add('red')
 }
 // 05
-export function exercise5 () {}
+export function exercise5 () {
+  let box = document.querySelector('#step05 .greybox a')
+  box.addEventListener('click', function (event) {
+    event.preventDefault()
+    let clickedMsg = document.createElement('p')
+    clickedMsg.innerHTML = 'You clicked!'
+    document.querySelector('#step05').appendChild(clickedMsg)
+  })
+}
 // 06
 export function exercise6 () {}
 // 07
