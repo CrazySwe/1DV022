@@ -34,7 +34,16 @@ export function exercise5 () {
   })
 }
 // 06
-export function exercise6 () {}
+export function exercise6 () {
+  let myDocFrag = document.createDocumentFragment()
+
+  for (let i = 0; i < 10; i++) {
+    let li = document.createElement('li')
+    li.innerText = `List element number ${i + 1}`
+    myDocFrag.appendChild(li)
+  }
+  document.querySelector('#list06').appendChild(myDocFrag)
+}
 // 07
 export function exercise7 () {}
 // 08
