@@ -45,8 +45,49 @@ export function exercise6 () {
   document.querySelector('#list06').appendChild(myDocFrag)
 }
 // 07
-export function exercise7 () {}
+export function exercise7 () {
+  let templateNode = document.querySelector('#step07-template')
+  let liTemplate
+  let list07 = document.querySelector('#list07')
+
+  for (let i = 0; i < 5; i++) {
+    liTemplate = document.importNode(templateNode.content, true)
+    let thisTemplate = liTemplate.querySelector('a')
+    thisTemplate.setAttribute('href', 'http://google.se')
+    thisTemplate.innerText = `This is link number ${i + 1}`
+    list07.appendChild(liTemplate)
+  }
+}
 // 08
-export function exercise8 () {}
+export function exercise8 () {
+  let button = document.querySelector('#todolistform button')
+  button.addEventListener('click', event => {
+    let textValue = button.previousElementSibling.value
+    if (textValue.length === 0) return
+
+    let li = document.createElement('li')
+    let ul = document.querySelector('#todolist ul')
+
+    li.innerText = textValue
+    ul.appendChild(li)
+    textValue = ''
+  })
+}
 // 09
-export function exercise9 () {}
+export function exercise9 () {
+  let username1 = document.querySelectorAll('#textboxes09 input')[0]
+  let username2 = document.querySelectorAll('#textboxes09 input')[1]
+  let validation = document.querySelector('#step09 .validation')
+
+  document.querySelector('#textboxes09').addEventListener('blur', event => {
+    if (username1.value.length > 0 && username2.value.length > 0) {
+      if (username1.value === username2.value) {
+        validation.innerText = 'The usernames are OK!'
+      } else {
+        validation.innerText = 'The usernames does not match!'
+      }
+    } else {
+      validation.innerText = ''
+    }
+  }, true)
+}
