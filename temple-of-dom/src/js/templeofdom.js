@@ -1,10 +1,13 @@
 /**
+ * @author Kevin Cederholm
+ * @version 1.0
  * @export
  * @class TempleOfDOM
  */
 export default class TempleOfDOM {
   /**
-   * Creates an instance of TempleOfDOM.
+   * Creates an instance of TempleOfDOM. Initializes properties
+   *
    * @constructor
    * @param {string} resultTemplate - Result template identifier
    * @memberof TempleOfDOM
@@ -18,6 +21,7 @@ export default class TempleOfDOM {
   }
 
   /**
+   * Runs the TempleOfDOM program
    *
    * @param {HTMLCollection} node
    * @memberof TempleOfDOM
@@ -30,6 +34,7 @@ export default class TempleOfDOM {
   }
 
   /**
+   * Counts the amount of nodes in a HTMLCollection recursively
    *
    * @param {HTMLCollection} node
    * @memberof TempleOfDOM
@@ -61,7 +66,8 @@ export default class TempleOfDOM {
   }
 
   /**
-   * 
+   * Counts the attributes of a node
+   *
    * @param {HTMLCollection} node
    * @memberof TempleOfDOM
    */
@@ -72,6 +78,7 @@ export default class TempleOfDOM {
   }
 
   /**
+   * Returns the result in a formatted DocumentFragment
    *
    * @returns {DocumentFragment}
    * @memberof TempleOfDOM
@@ -89,7 +96,7 @@ export default class TempleOfDOM {
     resultArr.map(valObj => {
       let templateCopy = document.importNode(templateNode.content, true)
       templateCopy.querySelector('.result h3').innerText = valObj.text
-      templateCopy.querySelector('.resultText').innerText = valObj.result
+      templateCopy.querySelector('p.resultText').innerText = valObj.result
       htmlResult.appendChild(templateCopy)
     })
     return htmlResult
