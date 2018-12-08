@@ -7,7 +7,11 @@ export default class QuizProxy {
   static getQuestion (obj, callFunc) {
     window.fetch(obj.url, obj.conf)
       .then(function (response) {
-        return response.json()
+        if (response.status === 200) {
+          return response.json()
+        } else {
+          console.log('Error: ' + response.status)
+        }
       })
       .then(function (myJson) {
         callFunc(myJson)
