@@ -1,3 +1,5 @@
+
+
 /**
  * @author Kevin Cederholm
  * @version 1.0
@@ -10,11 +12,15 @@ export default class Question {
     this.callback = callFunc
   }
   getQuestionBody () {
-    // remake this , Also implement template ?
+    // REMAKE this , Also implement template ?
     let docFrag = document.createDocumentFragment()
     let h1 = document.createElement('h1')
-    h1.textContent = 'Question ' + this.id
+    h1.textContent = 'Question'
     docFrag.appendChild(h1)
+    let timertxt = document.createElement('h4')
+    timertxt.setAttribute('id', 'timer')
+    timertxt.textContent = 'timer'
+    docFrag.appendChild(timertxt)
     let p = document.createElement('p')
     p.textContent = this.question
     docFrag.appendChild(p)
