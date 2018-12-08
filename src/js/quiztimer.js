@@ -3,9 +3,9 @@
  * @version 1.0
  */
 export default class QuizTimer {
-  constructor (time, element, owner) {
+  constructor (time, element, cb) {
     this.intervalID = undefined
-    this.owner = owner
+    this.callback = cb
     this.time = time
     this.rate = 100
     this.element = element
@@ -19,8 +19,8 @@ export default class QuizTimer {
 
   tick () {
     this.print(this.timeLeft())
-    if (this.elapsedSeconds() > 10) {
-      console.log(this.stop())
+    if (this.elapsedSeconds() >= this.time) {
+      this.callback()
     }
   }
 
