@@ -40,7 +40,7 @@ export default class Question {
       let submit = document.createElement('input')
       let txtbox = document.createElement('input')
       txtbox.setAttribute('id', 'answer')
-      txtbox.setAttribute('type','text')
+      txtbox.setAttribute('type', 'text')
       submit.setAttribute('type', 'button')
       submit.setAttribute('value', 'Skicka')
       docFrag.appendChild(txtbox)
