@@ -2,6 +2,7 @@
  * @author Kevin Cederholm
  * @version 1.0
  */
+
 import Quiz from './quiz.js'
 
 document.querySelector('#start').addEventListener('click', event => {

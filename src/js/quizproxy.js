@@ -23,6 +23,7 @@ export default class QuizProxy {
         return response.json()
       })
       .then(data => {
+        // maybe not handling this in here?
         if (data.message === 'Correct answer!' && data.hasOwnProperty('nextURL')) {
           callCorrect(data.nextURL)
         } else if (data.message === 'Correct answer!') {

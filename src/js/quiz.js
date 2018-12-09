@@ -3,6 +3,7 @@
  * @version 1.0
  */
 import QuizProxy from './quizproxy.js'
+import QuizTimer from './quiztimer.js'
 import Question from './question.js'
 export default class Quiz {
   constructor (name) {
@@ -11,6 +12,7 @@ export default class Quiz {
     this.boxNode = document.querySelector('#quizbox')
     this.question = null
     this.score = 0
+    this.timer = undefined
   }
 
   nextQuestion () {
@@ -42,12 +44,14 @@ export default class Quiz {
     this.clearNode()
     this.boxNode.appendChild(this.question.getQuestionBody())
     // Start timer
-    this.timer = setInterval(this.gameEnd.bind(this), 20000)
+    this.timer = new QuizTimer(20, document.querySelector('#timer'), this.gameEnd.bind(this))
+    this.timer.start()
   }
 
   sendAnswer (ans) {
     // stop timer
-    clearInterval(this.timer)
+    // We also add the score if answer is wrong
+    this.score += this.timer.stop()
     QuizProxy.sendAnswer({
       url: this.url,
       conf: { method: 'POST',
@@ -58,6 +62,7 @@ export default class Quiz {
     }, this.gameEnd.bind(this), this.correctAnswer.bind(this))
   }
   correctAnswer (nexturl) {
+    // add 1?
     this.score++
     if (nexturl !== null) {
       this.url = nexturl
@@ -69,9 +74,7 @@ export default class Quiz {
   gameEnd () {
     clearInterval(this.timer)
     this.clearNode()
-    this.boxNode.innerHTML = '<h1>END</h1><p>This was the end..</p>'
-    console.log('Here it ENDED')
-    console.log('Score: ' + this.score)
+    this.boxNode.innerHTML = '<h1>END</h1><p>This was the end.. Poäng: ' + this.score + '</p>'
 
     // stop the game
   }

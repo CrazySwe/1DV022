@@ -1,5 +1,3 @@
-
-
 /**
  * @author Kevin Cederholm
  * @version 1.0
@@ -19,7 +17,7 @@ export default class Question {
     docFrag.appendChild(h1)
     let timertxt = document.createElement('h4')
     timertxt.setAttribute('id', 'timer')
-    timertxt.textContent = 'timer'
+    timertxt.textContent = '0'
     docFrag.appendChild(timertxt)
     let p = document.createElement('p')
     p.textContent = this.question
@@ -36,13 +34,13 @@ export default class Question {
         btn.addEventListener('click', event => {
           this.callback(event.target.name)
         })
-
         docFrag.appendChild(btn)
       })
     } else {
       let submit = document.createElement('input')
       let txtbox = document.createElement('input')
       txtbox.setAttribute('id', 'answer')
+      txtbox.setAttribute('type','text')
       submit.setAttribute('type', 'button')
       submit.setAttribute('value', 'Skicka')
       docFrag.appendChild(txtbox)
