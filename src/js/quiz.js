@@ -20,16 +20,18 @@ export default class Quiz {
    */
   constructor (name = 'player') {
     this.name = name
-    this.url = 'http://vhost3.lnu.se:20080/question/1'
     this.boxNode = document.querySelector('#quizbox')
-    this.question = null
     this.highScore = new QuizHighScore()
-    this.qNr = 0
-    this.totalTime = 0
     this.timer = undefined
     this.qTime = 20
+    this.init()
   }
-
+  init () {
+    this.url = 'http://vhost3.lnu.se:20080/question/1'
+    this.question = null
+    this.qNr = 0
+    this.totalTime = 0
+  }
   async nextQuestion () {
     this.clearNode()
     this.boxNode.innerHTML = '<h1>Loading...</h1>'
@@ -96,6 +98,7 @@ export default class Quiz {
       })
       .then(data => {
         // maybe not handling this in here?
+        // this is bad practice
         if (data.message === 'Correct answer!' && data.hasOwnProperty('nextURL')) {
           this.correctAnswer(data.nextURL)
         } else if (data.message === 'Correct answer!') {
@@ -118,14 +121,22 @@ export default class Quiz {
     // final score is (questions * maxtime per question) - time spent
     let finalScore = ((this.qNr * this.qTime) - (this.totalTime / 1000).toFixed(0))
 
-    this.boxNode.innerHTML = '<h1>END</h1><p>This was the end..<br>Questions: ' +
-      this.qNr + '<br>Total time: ' + (this.totalTime / 1000) + ' seconds<br>Score: ' + finalScore + '</p>'
+    let geTemp = document.querySelector('#gameEndTemplate').content.cloneNode(true)
+    geTemp.querySelector('#highscorebtn').addEventListener('click', event => this.showHighscore())
+    geTemp.querySelector('#backbtn').addEventListener('click', event => this.showStart())
+
     if (this.highScore.isNewHighScore(this.name, finalScore, this.totalTime)) {
-      this.boxNode.innerHTML += '<p>A NEW HIGHSCORE!</p>'
+      geTemp.prepend(document.createTextNode('A NEW HIGHSCORE!'))
     }
+    let ddElem = geTemp.querySelectorAll('#resultList dd')
+    ddElem[0].textContent = finalScore
+    ddElem[1].textContent = (this.totalTime / 1000).toFixed(1) + 's'
+
+    this.boxNode.appendChild(geTemp)
   }
 
   showStart () {
+    this.init()
     this.clearNode()
     let startTemplate = document.querySelector('#startTemplate').content.cloneNode(true)
     this.boxNode.appendChild(startTemplate)
@@ -139,10 +150,24 @@ export default class Quiz {
     })
     document.querySelector('#highscorebtn').addEventListener('click', event => this.showHighscore())
   }
+
   showHighscore () {
-    // this.clearNode()
+    this.clearNode()
     let listJson = this.highScore.getSavedLocal()
-    console.log(listJson)
+    let hstemp = document.querySelector('#highscoreTemplate').content.cloneNode(true)
+    let hstable = hstemp.querySelector('#highscoretbl')
+
+    for (let i = 0; i < listJson.length; i++) {
+      let rowTemp = document.querySelector('#playerRowTemplate').content.cloneNode(true)
+
+      rowTemp.querySelector('.hsname').textContent = listJson[i].name
+      rowTemp.querySelector('.hsscore').textContent = listJson[i].score
+      rowTemp.querySelector('.hstime').textContent = (listJson[i].time / 1000).toFixed(1) + 's'
+
+      hstable.appendChild(rowTemp)
+    }
+    hstemp.querySelector('#backbtn').addEventListener('click', event => this.showStart())
+    this.boxNode.appendChild(hstemp)
   }
 
   clearNode () {

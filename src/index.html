@@ -12,7 +12,7 @@
         <div id="wrapper">
             <div id="container">
                 <div id="quizbox">
-                    Initial content
+                    You have to activate javascript for this to work...
                 </div>
             </div>
         </div>
@@ -29,6 +29,28 @@
            <h4 id="qTimer">-</h4>
            <p id="question"></p>
            <input id="qBtn" type="button" value="Answer">
+       </template>
+       <template id="highscoreTemplate">
+            <h1>Highscore</h1>
+            <table id="highscoretbl">
+                <tr><th>Name</th><th>Score</th><th>Time</th></tr>
+            </table>
+            <input name="back" id="backbtn" type="button" value="Back">
+       </template>
+       <template id="playerRowTemplate">
+           <tr><td class="hsname"></td><td class="hsscore"></td><td class="hstime"></td>
+            </tr>
+       </template>
+       <template id="gameEndTemplate">
+           <h1 id="header">Game Over</h1>
+            <dl id="resultList">
+                <dt><h3>Score</h3></dt>
+                <dd></dd>
+                <dt><h3>Time</h3></dt>
+                <dd></dd>
+            </dl>
+            <input name="back" id="backbtn" type="button" value="Back">
+            <input name="highscore" id="highscorebtn" type="button" value="Highscore">
        </template>
         <script nomodule src="build.js"></script>
     </body>

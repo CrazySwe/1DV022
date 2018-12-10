@@ -24,7 +24,7 @@ export default class QuizHighScore {
     this.name = name
     this.score = score
     this.time = time
-
+    console.log(this.score)
     if (this.highscore.length < 5 || this.score > this.highscore[this.highscore.length - 1].score) {
       isNewHigh = true
       this.saveToLocal()
@@ -45,10 +45,5 @@ export default class QuizHighScore {
       this.highscore = this.highscore.slice(0, 5)
     }
     window.localStorage.setItem(this.storageName, JSON.stringify(this.highscore))
-  }
-  getDocFrag () {
-    let docFrag = document.createDocumentFragment()
-    // Create highscore and append to doc frag and return
-    return docFrag
   }
 }
