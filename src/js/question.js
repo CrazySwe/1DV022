@@ -3,12 +3,27 @@
  * @version 1.0
  */
 export default class Question {
+  /**
+   * Creates an instance of Question.
+   * @param {number} id - Question id
+   * @param {string} question - The question string
+   * @param {object} [alt=null] - The alternatives if any
+   * @param {function} callFunc - the callback function
+   * @memberof Question
+   */
   constructor (id, question, alt = null, callFunc) {
     this.id = id
     this.question = question
     this.alt = alt
     this.callback = callFunc
   }
+
+  /**
+   * Creates and handles the layout of the question
+   *
+   * @returns {object} - Document Fragment containing the question
+   * @memberof Question
+   */
   getQuestionBody () {
     let qTemplate = document.querySelector('#questionTemplate').content.cloneNode(true)
     let docFrag = document.createDocumentFragment()

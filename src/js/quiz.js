@@ -26,34 +26,32 @@ export default class Quiz {
     this.qTime = 20
     this.init()
   }
+  /**
+   * initalizing variables for new round
+   */
   init () {
     this.url = 'http://vhost3.lnu.se:20080/question/1'
     this.question = null
     this.qNr = 0
     this.totalTime = 0
   }
+  /**
+   * Sends request for new question from server
+   */
   async nextQuestion () {
     this.clearNode()
     this.boxNode.innerHTML = '<h1>Loading...</h1>'
 
     let response = await window.fetch(this.url, { method: 'GET' })
     let myjson = await response.json()
-    // let myjson = await window.fetch(this.url, { method: 'GET' })
-    //   .then(function (response) {
-    //     console.log(response.status)
-    //     // if (response.status === 200) {
-    //     //   return response.json()
-    //     // } else {
-    //     //   console.log('Error: ' + response.status + this.url)
-    //     // }
-    //     return response.json()
-    //   })
     this.handleQuestion(myjson)
-    // .then(myJson => {
-    //   this.handleQuestion(myJson)
-    // })
   }
 
+  /**
+   * handles the response from server and creates new question object
+   *
+   * @param {Object} jsondata
+   */
   handleQuestion (jsondata) {
     this.qNr++
     let alternatives = null
@@ -71,6 +69,9 @@ export default class Quiz {
     this.showQuestion()
   }
 
+  /**
+   * Shows the question and starts the timer
+   */
   showQuestion () {
     this.clearNode()
     this.boxNode.appendChild(this.question.getQuestionBody())
@@ -79,9 +80,11 @@ export default class Quiz {
     this.timer.start()
   }
 
+  /**
+   * Stops the timer and sends the answer to server
+   * @param {string|number} ans
+   */
   sendAnswer (ans) {
-    // stop timer
-    // We also add the score if answer is wrong
     let nr = this.timer.stop()
     this.totalTime += nr
     let conf = {
@@ -108,6 +111,12 @@ export default class Quiz {
         }
       })
   }
+
+  /**
+   * Handles the answer from server after quizanswer sent
+   *
+   * @param {string} nexturl
+   */
   correctAnswer (nexturl) {
     if (nexturl !== null) {
       this.url = nexturl
@@ -116,6 +125,10 @@ export default class Quiz {
       this.gameEnd()
     }
   }
+
+  /**
+   * Shows the game over screen with info
+   */
   gameEnd () {
     this.clearNode()
     // final score is (questions * maxtime per question) - time spent
@@ -135,6 +148,9 @@ export default class Quiz {
     this.boxNode.appendChild(geTemp)
   }
 
+  /**
+   * Shows the start screen
+   */
   showStart () {
     this.init()
     this.clearNode()
@@ -150,7 +166,9 @@ export default class Quiz {
     })
     document.querySelector('#highscorebtn').addEventListener('click', event => this.showHighscore())
   }
-
+  /**
+   * Shows the highscore screen
+   */
   showHighscore () {
     this.clearNode()
     let listJson = this.highScore.getSavedLocal()
@@ -169,7 +187,9 @@ export default class Quiz {
     hstemp.querySelector('#backbtn').addEventListener('click', event => this.showStart())
     this.boxNode.appendChild(hstemp)
   }
-
+  /**
+ * Clears the screen of current nodes
+ */
   clearNode () {
     while (this.boxNode.hasChildNodes()) {
       this.boxNode.removeChild(this.boxNode.firstChild)

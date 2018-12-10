@@ -3,10 +3,18 @@
  * @version 1.0
  */
 export default class QuizHighScore {
+  /**
+   * Creates a new highscore object
+   */
   constructor () {
     this.storageName = 'highscorelist'
     this.highscore = this.getSavedLocal()
   }
+
+  /**
+   * Gets the highscore from current localstorage if it exists
+   * @returns {array}
+   */
   getSavedLocal () {
     let list = []
     let localFile = window.localStorage.getItem(this.storageName)
@@ -19,6 +27,15 @@ export default class QuizHighScore {
     }
     return list
   }
+
+  /**
+   * Check if its a new highscore, then add it
+   *
+   * @param {string} name - the name of the player
+   * @param {number} score
+   * @param {number} time - number in ms
+   * @returns {boolean}
+   */
   isNewHighScore (name, score, time) {
     let isNewHigh = false
     this.name = name
@@ -31,6 +48,10 @@ export default class QuizHighScore {
     }
     return isNewHigh
   }
+
+  /**
+   * Saving the highscore list to localstorage
+   */
   saveToLocal () {
     let scoreObj = {
       name: this.name,
