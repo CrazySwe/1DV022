@@ -28,16 +28,6 @@ export default class Quiz {
     this.totalTime = 0
     this.timer = undefined
     this.qTime = 20
-
-    document.querySelector('#name').focus()
-    document.querySelector('#startbtn').addEventListener('click', event => {
-      let name = document.querySelector('#name')
-      if (name.value.length >= 1) {
-        this.name = name.value
-        this.nextQuestion()
-      }
-    })
-    document.querySelector('#highscorebtn').addEventListener('click', event => this.showHighscore())
   }
 
   async nextQuestion () {
@@ -83,7 +73,7 @@ export default class Quiz {
     this.clearNode()
     this.boxNode.appendChild(this.question.getQuestionBody())
     // Start timer
-    this.timer = new QuizTimer(this.qTime, document.querySelector('#timer'), this.gameEnd.bind(this))
+    this.timer = new QuizTimer(this.qTime, document.querySelector('#qTimer'), this.gameEnd.bind(this))
     this.timer.start()
   }
 
@@ -136,13 +126,21 @@ export default class Quiz {
   }
 
   showStart () {
-    // this.clearNode()
-    // implement later
-    // let docFrag = document.createDocumentFragment()
-    // this.boxNode.appendChild(docFrag)
+    this.clearNode()
+    let startTemplate = document.querySelector('#startTemplate').content.cloneNode(true)
+    this.boxNode.appendChild(startTemplate)
+    this.boxNode.querySelector('#name').focus()
+    this.boxNode.querySelector('#startbtn').addEventListener('click', event => {
+      let name = document.querySelector('#name')
+      if (name.value.length >= 1) {
+        this.name = name.value
+        this.nextQuestion()
+      }
+    })
+    document.querySelector('#highscorebtn').addEventListener('click', event => this.showHighscore())
   }
   showHighscore () {
-    // implement more later
+    // this.clearNode()
     let listJson = this.highScore.getSavedLocal()
     console.log(listJson)
   }

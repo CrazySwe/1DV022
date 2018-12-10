@@ -10,23 +10,17 @@ export default class Question {
     this.callback = callFunc
   }
   getQuestionBody () {
-    // REMAKE this , Also implement template ?
+    let qTemplate = document.querySelector('#questionTemplate').content.cloneNode(true)
     let docFrag = document.createDocumentFragment()
-    let h1 = document.createElement('h1')
-    h1.textContent = 'Question'
-    docFrag.appendChild(h1)
-    let timertxt = document.createElement('h4')
-    timertxt.setAttribute('id', 'timer')
-    timertxt.textContent = '0'
-    docFrag.appendChild(timertxt)
-    let p = document.createElement('p')
-    p.textContent = this.question
-    docFrag.appendChild(p)
+    docFrag.appendChild(qTemplate)
+
+    docFrag.querySelector('#qHeader').textContent = 'Question ' + this.id
+    docFrag.querySelector('#question').textContent = this.question
 
     if (this.alt !== null && typeof this.alt === 'object') {
-      // if alternatives
-      // console.log(this.alt)
+      docFrag.removeChild(docFrag.querySelector('#qBtn'))
       Object.keys(this.alt).forEach(key => {
+        // Create custom answer button
         let btn = document.createElement('input')
         btn.setAttribute('type', 'button')
         btn.setAttribute('value', this.alt[key])
@@ -34,21 +28,19 @@ export default class Question {
         btn.addEventListener('click', event => {
           this.callback(event.target.name)
         })
-        docFrag.appendChild(btn)
+
+        docFrag.insertBefore(btn, docFrag.querySelector('#qBtn'))
       })
     } else {
-      let submit = document.createElement('input')
       let txtbox = document.createElement('input')
       txtbox.setAttribute('id', 'answer')
       txtbox.setAttribute('type', 'text')
-      submit.setAttribute('type', 'button')
-      submit.setAttribute('value', 'Skicka')
-      docFrag.appendChild(txtbox)
-      submit.addEventListener('click', event => {
+      docFrag.insertBefore(txtbox, docFrag.querySelector('#qBtn'))
+
+      docFrag.querySelector('#qBtn').addEventListener('click', event => {
         let ans = document.querySelector('#answer').value
         this.callback(ans)
       })
-      docFrag.appendChild(submit)
     }
     return docFrag
   }

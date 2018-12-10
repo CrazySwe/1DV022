@@ -12,15 +12,24 @@
         <div id="wrapper">
             <div id="container">
                 <div id="quizbox">
-                    <h1>Simple Quiz!</h1>
-                    <p>This is my 2nd examination for 1dv022</p>
-                    <span>Name:</span>
-                    <input id="name" type="text">
-                    <input name="START" id="startbtn" type="button" value="Start">
-                    <input name="highscore" id="highscorebtn" type="button" value="Highscore">
+                    Initial content
                 </div>
             </div>
         </div>
+        <template id="startTemplate">
+            <h1>Simple Quiz 1.0</h1>
+            <p>This is my 2nd examination for 1dv022</p>
+            <span>Name:</span>
+            <input id="name" type="text">
+            <input name="start" id="startbtn" type="button" value="Start">
+            <input name="highscore" id="highscorebtn" type="button" value="Highscore">
+       </template>
+       <template id="questionTemplate">
+           <h1 id="qHeader"></h1>
+           <h4 id="qTimer">-</h4>
+           <p id="question"></p>
+           <input id="qBtn" type="button" value="Answer">
+       </template>
         <script nomodule src="build.js"></script>
     </body>
 </html>
