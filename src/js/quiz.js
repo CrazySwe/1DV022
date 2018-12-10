@@ -4,6 +4,7 @@
  */
 import QuizTimer from './quiztimer.js'
 import Question from './question.js'
+import QuizHighScore from './quizhighscore.js'
 
 /**
  *  Implementation of a quiz
@@ -17,34 +18,48 @@ export default class Quiz {
    * @param {string} name - Name of the quizplayer
    * @memberof Quiz
    */
-  constructor (name) {
+  constructor (name = 'player') {
     this.name = name
     this.url = 'http://vhost3.lnu.se:20080/question/1'
     this.boxNode = document.querySelector('#quizbox')
     this.question = null
+    this.highScore = new QuizHighScore()
     this.qNr = 0
     this.totalTime = 0
     this.timer = undefined
-    this.qTime = 30
+    this.qTime = 20
+
+    document.querySelector('#name').focus()
+    document.querySelector('#startbtn').addEventListener('click', event => {
+      let name = document.querySelector('#name')
+      if (name.value.length >= 1) {
+        this.name = name.value
+        this.nextQuestion()
+      }
+    })
+    document.querySelector('#highscorebtn').addEventListener('click', event => this.showHighscore())
   }
 
-  nextQuestion () {
+  async nextQuestion () {
     this.clearNode()
     this.boxNode.innerHTML = '<h1>Loading...</h1>'
 
-    window.fetch(this.url, { method: 'GET' })
-      .then(function (response) {
-        console.log(response.status)
-        // if (response.status === 200) {
-        //   return response.json()
-        // } else {
-        //   console.log('Error: ' + response.status + this.url)
-        // }
-        return response.json()
-      })
-      .then(myJson => {
-        this.handleQuestion(myJson)
-      })
+    let response = await window.fetch(this.url, { method: 'GET' })
+    let myjson = await response.json()
+    // let myjson = await window.fetch(this.url, { method: 'GET' })
+    //   .then(function (response) {
+    //     console.log(response.status)
+    //     // if (response.status === 200) {
+    //     //   return response.json()
+    //     // } else {
+    //     //   console.log('Error: ' + response.status + this.url)
+    //     // }
+    //     return response.json()
+    //   })
+    this.handleQuestion(myjson)
+    // .then(myJson => {
+    //   this.handleQuestion(myJson)
+    // })
   }
 
   handleQuestion (jsondata) {
@@ -101,8 +116,6 @@ export default class Quiz {
       })
   }
   correctAnswer (nexturl) {
-    // add 1?
-    // this.totalTime++
     if (nexturl !== null) {
       this.url = nexturl
       this.nextQuestion()
@@ -112,15 +125,26 @@ export default class Quiz {
   }
   gameEnd () {
     this.clearNode()
-    this.boxNode.innerHTML = '<h1>END</h1><p>This was the end.. nr of questions: ' +
-      this.qNr + ' Score: ' + this.totalTime + '</p>'
+    // final score is (questions * maxtime per question) - time spent
+    let finalScore = ((this.qNr * this.qTime) - (this.totalTime / 1000).toFixed(0))
+
+    this.boxNode.innerHTML = '<h1>END</h1><p>This was the end..<br>Questions: ' +
+      this.qNr + '<br>Total time: ' + (this.totalTime / 1000) + ' seconds<br>Score: ' + finalScore + '</p>'
+    if (this.highScore.isNewHighScore(this.name, finalScore, this.totalTime)) {
+      this.boxNode.innerHTML += '<p>A NEW HIGHSCORE!</p>'
+    }
   }
 
   showStart () {
+    // this.clearNode()
     // implement later
+    // let docFrag = document.createDocumentFragment()
+    // this.boxNode.appendChild(docFrag)
   }
   showHighscore () {
-    // implement later
+    // implement more later
+    let listJson = this.highScore.getSavedLocal()
+    console.log(listJson)
   }
 
   clearNode () {
