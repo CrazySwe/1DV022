@@ -4,25 +4,26 @@
   <title>My WebDesktop</title>
   <script type="module" src="js/app.js"></script>
   <link href="css/style.css" rel="stylesheet" type="text/css">
+  <script type="module" src="js/app.js"></script>
+  <template id="windowtemp">
+      <div class="window"> 
+          <div class="window-topbar">
+            Name |DragArea| Exit-button
+          </div>
+          <div class="window-menu">
+            <a href="#">Arkiv..</a>
+            <a href="#">Edit..</a>
+          </div>
+          <div class="window-content"><p>en paragraph</p>
+            <p>två paragraph</p>
+            <p>tre paragraph</p>
+          </div>
+          <div class="window-bottombar">Maybe resize window?</div>
+        </div>
+  </template>
 </head>
 <body>
   <div id="desk-frame">
-    
-    <div class="window"> 
-      <div class="window-topbar">
-        Name |DragArea| Exit-button
-      </div>
-      <div class="window-menu">
-        <a href="#">Arkiv..</a>
-        <a href="#">Edit..</a>
-      </div>
-      <div class="window-content"><p>en paragraph</p>
-        <p>två paragraph</p>
-        <p>tre paragraph</p>
-      </div>
-      <div class="window-bottombar">Maybe resize window?</div>
-    </div>
-
     <!-- Taskbar -->
     <div id="desk-taskbar">
       <ul>
@@ -33,6 +34,7 @@
     </div>
     
   </div>
+  
   <script nomodule src="build.js"></script>
 </body>
 </html>

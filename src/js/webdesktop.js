@@ -11,14 +11,23 @@ export default class WebDesktop {
   constructor () {
     this.windows = []
     this.focus = null
+    this.offsetX = null
+    this.offsetY = null
     this.dragMouseFunc = this.onDragMouse.bind(this)
     this.mouseUpFunc = this.mouseUp.bind(this)
   }
 
   run () {
-    document.addEventListener('mousedown', this.mouseDown.bind(this))
-    document.addEventListener('keydown', this.keyDown.bind(this))
+    window.addEventListener('mousedown', this.mouseDown.bind(this))
+    window.addEventListener('keydown', this.keyDown.bind(this))
     window.addEventListener('resize', this.onDeskResize.bind(this))
+
+    // Test window
+    let wTemp = document.querySelector('#windowtemp').content.cloneNode(true)
+    wTemp.querySelector('.window').style.top = '100px'
+    wTemp.querySelector('.window').style.left = '100px'
+    document.querySelector('#desk-frame').prepend(wTemp)
+
     // Starting the WebDesktop from here?
     // add eventlisteners on the desktop
   }
@@ -26,15 +35,12 @@ export default class WebDesktop {
   mouseDown (event) {
     event.preventDefault()
     if (event.target.className === 'window-topbar') {
-      // viewport size for boundaries
-      // window.innerWidth
-      // window.innerHeigth
-      console.log(event.target.parentElement)
+      this.offsetY = (event.clientY - parseInt(event.target.parentElement.style.top, 10))
+      this.offsetX = (event.clientX - parseInt(event.target.parentElement.style.left, 10))
       this.focus = event.target
 
       document.addEventListener('mousemove', this.dragMouseFunc)
       document.addEventListener('mouseup', this.mouseUpFunc)
-      // console.log('x ' + event.clientX + ': y ' + event.clientY)
     }
   }
 
@@ -46,14 +52,26 @@ export default class WebDesktop {
 
   keyDown (event) {
     // event.preventDefault()
-    // console.log('Key pressed down - ' + event.keyCode)
+    console.log(event.key)
   }
 
   onDragMouse (event) {
     event.preventDefault()
-    this.focus.parentElement.style.top = event.clientY + 'px'
-    this.focus.parentElement.style.left = event.clientX + 'px'
-    console.log('new pos: x ' + event.clientX + ': y ' + event.clientY)
+    this.moveWindowTo((event.clientX - this.offsetX), (event.clientY - this.offsetY))
+    // console.log('new pos: x ' + event.clientX + ': y ' + event.clientY)
+  }
+
+  moveWindowTo (x, y) {
+    // Set maximum offscreen
+    let halfWidth = this.focus.parentElement.clientWidth / 2
+    let halfHeigth = this.focus.parentElement.clientWidth / 2
+
+    if (x >= 0 && x <= (window.innerWidth - halfWidth)) {
+      this.focus.parentElement.style.left = x + 'px'
+    }
+    if (y >= 0 && y <= (window.innerHeight - halfHeigth)) {
+      this.focus.parentElement.style.top = y + 'px'
+    }
   }
 
   onDeskResize () {
