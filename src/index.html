@@ -7,7 +7,10 @@
   <script type="module" src="js/app.js"></script>
   <template id="windowtemp">
       <div class="window"> 
-          <div class="window-topbar"><span class="window-name">NAMN!</span>| DragArea | Exit-button</div>
+          <div class="window-topbar">
+            <span class="window-name">NAMN!</span>
+            <a class="closebtn" href="#">X</a>
+          </div>
           <div class="window-menu">
             <a href="#">Arkiv..</a>
             <a href="#">Edit..</a>
@@ -25,9 +28,8 @@
     <!-- Taskbar -->
     <div id="desk-taskbar">
       <ul>
-        <li value="quizapp">Quiz</li>
+        <li value="chatapp">Chat</li>
         <li value="memoryapp">Memory</li>
-        <li value="testapp">Test</li>
       </ul>
     </div>
     

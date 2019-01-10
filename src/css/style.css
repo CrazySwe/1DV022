@@ -47,6 +47,10 @@ body {
   right:0;
 }
 
+.closebtn {
+  float:right;
+}
+
 /* Taskbar */
 
 #desk-taskbar {
