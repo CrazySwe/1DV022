@@ -7,4 +7,8 @@ export default class Point2D {
     this.x = x
     this.y = y
   }
+
+  toString () {
+    return 'X = ' + this.x + ' Y = ' + this.y
+  }
 }
