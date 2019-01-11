@@ -4,6 +4,8 @@
  */
 import Window from './window.js'
 import Point2D from './point2d.js'
+import Memory from './apps/memory/memory.js'
+import Chat from './apps/chat/chat.js'
 
 export default class WebDesktop {
   /**
@@ -19,32 +21,42 @@ export default class WebDesktop {
   }
 
   run () {
-    window.addEventListener('mousedown', this.mouseDown.bind(this))
-    window.addEventListener('resize', this.onDeskResize.bind(this))
+    document.addEventListener('mousedown', this.mouseDown.bind(this))
+    document.addEventListener('resize', this.onDeskResize.bind(this))
+    document.addEventListener('click', this.mouseClick.bind(this))
+  }
+
+  mouseClick (event) {
+    if (event.target.tagName === 'LI') {
+      let pos = new Point2D(50 + 15 * this.idCount, 50 + 15 * this.idCount)
+      switch (event.target.attributes.value.value) {
+        case 'valfri':
+          this.windows.push(new Window(this.idCount++, 'valfriapp', 'content', this.zCount++, this.desktopElement, pos))
+          break
+        case 'memoryapp':
+          this.windows.push(new Memory(this.idCount++, this.zCount++, this.desktopElement, pos))
+          break
+        case 'chatapp':
+          this.windows.push(new Chat(this.idCount++, this.zCount++, this.desktopElement, pos))
+          break
+      }
+    }
   }
 
   mouseDown (event) {
     // Identify window correctly here
     if (event.target.closest('.window') != null) {
-      let found = false
-      for (let i = 0; i < this.windows.length && !found; i++) {
+      let winIndex = 0
+      for (let i = 0; i < this.windows.length && winIndex != null; i++) {
         if (event.target.closest('#' + this.windows[i].id) != null) {
           this.setfocus(this.windows[i].element)
-          found = true
+          winIndex = i
         }
       }
-    }
-    if (event.target.tagName === 'LI') {
-      switch (event.target.attributes.value.value) {
-        case 'valfri':
-          this.createWindow('valfri', 'valfricontent')
-          break
-        case 'memoryapp':
-          this.createWindow('memoryappen', 'putcontenthere')
-          break
-        case 'chatapp':
-          this.createWindow('ChatApp', 'Content for chat here')
-          break
+
+      // Remove if they are closing the window
+      if (event.target.classList.contains('closebtn')) {
+        this.windows.splice(winIndex, 1)
       }
     }
   }

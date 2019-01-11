@@ -17,10 +17,8 @@ body {
   display:inline-block;
   position: absolute;
   /* top: 200px;
-  left: 200px; */
-  z-index: 25;
-  width:400px;
-  height:300px;
+  left: 200px;
+  z-index: 25;*/
   
 }
 .window-topbar {
@@ -37,14 +35,14 @@ body {
 
 .window-content {
   padding:2px;
+  overflow:auto;
+  word-wrap:break-word;
 }
 
 .window-bottombar {
   padding:2px;
   background-color:lightgray;
-  position: absolute;
-  bottom:0;
-  right:0;
+
 }
 
 .closebtn {
@@ -61,7 +59,7 @@ body {
   right:0;
   margin:auto;
   bottom:0;
-  
+  z-index: 99999;
   width:20%;
   text-align:center;
 }

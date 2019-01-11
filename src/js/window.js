@@ -13,11 +13,13 @@ export default class Window {
     this.offset = new Point2D(0, 0)
     this.position = position
     this.name = name
-    this.content = content
+    this.content = this.element.querySelector('.window-content')
     this.mouseUpHandler = this.mouseUp.bind(this)
     this.mouseMoveHandler = this.onDragMouse.bind(this)
     this.init()
     deskElement.append(this.element)
+    this.element = document.querySelector('#' + this.id)
+    this.setWindowSize(new Point2D(300, 400))
   }
 
   init () {
@@ -27,7 +29,6 @@ export default class Window {
     this.element.querySelector('.window').style.top = this.position.y + 'px'
     this.element.querySelector('.window').style.left = this.position.x + 'px'
     this.element.querySelector('.window').style.zIndex = this.zIndex
-    this.element = this.element.querySelector('#' + this.id)
 
     // Move window
     this.element.querySelector('.window-topbar').addEventListener('mousedown', this.onMouseDown.bind(this))
@@ -63,6 +64,11 @@ export default class Window {
     if (pos.y >= 0 && pos.y <= (window.innerHeight - halfHeigth)) {
       this.element.style.top = pos.y + 'px'
     }
+  }
+
+  setWindowSize (size) {
+    this.element.querySelector('.window-content').style.height = size.y + 'px'
+    this.element.querySelector('.window-content').style.width = size.x + 'px'
   }
 
   destroy () {
