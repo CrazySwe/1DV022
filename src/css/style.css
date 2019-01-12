@@ -45,12 +45,16 @@ body {
   padding:2px;
   height:15px;
   background-color:lightgray;
-
+  -moz-user-select: none;
 }
 
-.window-bottombar img {
-  float:right;
+
+.window-resizebtn {
+  background-image: url("../image/dragicon.png");
+  height: 15px;
+  width:15px;
   cursor: nw-resize;
+  float:right;
 }
 
 .closebtn {

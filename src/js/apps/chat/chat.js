@@ -58,7 +58,11 @@ export default class Chat extends Window {
     if (msg.username === 'MyFancyUsername') {
       message.style.backgroundColor = 'lightblue'
     }
-    message.innerHTML = `${msg.username}: ${msg.data}`
+    if (msg.channel) {
+      message.innerHTML = `${msg.username}@${msg.channel}: ${msg.data}`
+    } else {
+      message.innerHTML = `${msg.username}: ${msg.data}`
+    }
     this.contentNode.querySelector('.messages').append(message)
   }
 

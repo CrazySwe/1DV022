@@ -11,11 +11,16 @@ export default class Window {
     this.name = name
     this.zIndex = zIndex
     this.offset = new Point2D(0, 0)
+    this.minSize = new Point2D(200, 150)
     this.position = position
     this.name = name
     this.contentNode = this.element.querySelector('.window-content')
+
+    // Event Handlers
     this.mouseUpHandler = this.mouseUp.bind(this)
     this.mouseMoveHandler = this.onDragMouse.bind(this)
+    this.resizeDragHandle = this.resizeDrag.bind(this)
+
     this.init()
     deskElement.append(this.element)
     this.element = document.querySelector('#' + this.id)
@@ -35,7 +40,7 @@ export default class Window {
     // Close Window
     this.element.querySelector('.closebtn').addEventListener('click', this.destroy.bind(this))
     // Resize Window
-    this.element.querySelector('.window-topbar').addEventListener('mousedown', this.resize.bind(this))
+    this.element.querySelector('.window-resizebtn').addEventListener('mousedown', this.resize.bind(this))
   }
 
   onMouseDown (event) {
@@ -69,12 +74,29 @@ export default class Window {
   }
 
   setWindowSize (size) {
-    this.element.querySelector('.window-content').style.height = size.y + 'px'
-    this.element.querySelector('.window-content').style.width = size.x + 'px'
+    if (size.x > this.minSize.x) {
+      this.contentNode.style.width = size.x + 'px'
+    }
+    if (size.y > this.minSize.y) {
+      this.contentNode.style.height = size.y + 'px'
+    }
   }
 
   resize (event) {
-    // let origin = new Point2D(event.clientX, event.clientY)
+    this.offset = new Point2D(event.clientX, event.clientY)
+    this.origsize = new Point2D(parseInt(this.contentNode.style.width), parseInt(this.contentNode.style.height))
+
+    document.addEventListener('mousemove', this.resizeDragHandle)
+    document.addEventListener('mouseup', event => {
+      document.removeEventListener('mousemove', this.resizeDragHandle)
+      // document.removeEventListener('mouseup', )
+    })
+  }
+
+  resizeDrag (event) {
+    let size = new Point2D(event.clientX - this.offset.x + this.origsize.x, event.clientY - this.offset.y + this.origsize.y)
+    this.setWindowSize(size)
+    // document.removeEventListener('mousemove', this.mouseMoveHandler)
   }
 
   destroy () {
