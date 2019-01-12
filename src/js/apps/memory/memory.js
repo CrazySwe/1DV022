@@ -7,7 +7,7 @@ import Point2D from '../../point2d.js'
 
 export default class Memory extends Window {
   constructor (id, zIndex, deskElement, position) {
-    super(id, 'Memory', 'MemoryContent', zIndex, deskElement, position)
+    super(id, 'Memory', zIndex, deskElement, position)
     this.setWindowSize(new Point2D(500, 500))
   }
 

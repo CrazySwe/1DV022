@@ -1,11 +1,13 @@
 * {
   margin: 0;
   padding: 0;
+ 
 }
 
 body {
   background-image:url('https://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-438983.jpg');
   overflow:hidden;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
 }
 
 /* Window */
@@ -35,14 +37,20 @@ body {
 
 .window-content {
   padding:2px;
-  overflow:auto;
+  overflow: auto;
   word-wrap:break-word;
 }
 
 .window-bottombar {
   padding:2px;
+  height:15px;
   background-color:lightgray;
 
+}
+
+.window-bottombar img {
+  float:right;
+  cursor: nw-resize;
 }
 
 .closebtn {
@@ -76,3 +84,5 @@ body {
   padding: 10px;
   display: inline-block;
 }
+
+/* ChatApp */

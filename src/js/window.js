@@ -5,7 +5,7 @@
 import Point2D from './point2d.js'
 
 export default class Window {
-  constructor (id, name, content, zIndex, deskElement, position) {
+  constructor (id, name, zIndex, deskElement, position) {
     this.element = document.querySelector('#windowtemp').content.cloneNode(true)
     this.id = 'win' + id
     this.name = name
@@ -13,7 +13,7 @@ export default class Window {
     this.offset = new Point2D(0, 0)
     this.position = position
     this.name = name
-    this.content = this.element.querySelector('.window-content')
+    this.contentNode = this.element.querySelector('.window-content')
     this.mouseUpHandler = this.mouseUp.bind(this)
     this.mouseMoveHandler = this.onDragMouse.bind(this)
     this.init()
@@ -24,7 +24,7 @@ export default class Window {
 
   init () {
     this.element.querySelector('.window').id = this.id
-    this.element.querySelector('.window-content').innerHTML = this.content
+    // this.element.querySelector('.window-content').innerHTML = this.content
     this.element.querySelector('.window-name').textContent = this.name
     this.element.querySelector('.window').style.top = this.position.y + 'px'
     this.element.querySelector('.window').style.left = this.position.x + 'px'
@@ -34,6 +34,8 @@ export default class Window {
     this.element.querySelector('.window-topbar').addEventListener('mousedown', this.onMouseDown.bind(this))
     // Close Window
     this.element.querySelector('.closebtn').addEventListener('click', this.destroy.bind(this))
+    // Resize Window
+    this.element.querySelector('.window-topbar').addEventListener('mousedown', this.resize.bind(this))
   }
 
   onMouseDown (event) {
@@ -69,6 +71,10 @@ export default class Window {
   setWindowSize (size) {
     this.element.querySelector('.window-content').style.height = size.y + 'px'
     this.element.querySelector('.window-content').style.width = size.x + 'px'
+  }
+
+  resize (event) {
+    // let origin = new Point2D(event.clientX, event.clientY)
   }
 
   destroy () {

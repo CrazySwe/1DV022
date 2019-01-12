@@ -31,7 +31,7 @@ export default class WebDesktop {
       let pos = new Point2D(50 + 15 * this.idCount, 50 + 15 * this.idCount)
       switch (event.target.attributes.value.value) {
         case 'valfri':
-          this.windows.push(new Window(this.idCount++, 'valfriapp', 'content', this.zCount++, this.desktopElement, pos))
+          this.windows.push(new Window(this.idCount++, 'valfriapp', this.zCount++, this.desktopElement, pos))
           break
         case 'memoryapp':
           this.windows.push(new Memory(this.idCount++, this.zCount++, this.desktopElement, pos))
@@ -79,10 +79,5 @@ export default class WebDesktop {
     if (element.style.zIndex < this.zCount) {
       element.style.zIndex = ++this.zCount
     }
-  }
-
-  createWindow (name, content) {
-    let pos = new Point2D(50 + 15 * this.idCount, 50 + 15 * this.idCount)
-    this.windows.push(new Window(this.idCount++, name, content, this.zCount++, this.desktopElement, pos))
   }
 }

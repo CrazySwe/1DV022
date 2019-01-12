@@ -4,24 +4,38 @@
   <title>My WebDesktop</title>
   <script type="module" src="js/app.js"></script>
   <link href="css/style.css" rel="stylesheet" type="text/css">
-  <script type="module" src="js/app.js"></script>
   <template id="windowtemp">
       <div class="window"> 
           <div class="window-topbar">
             <span class="window-name">NAMN!</span>
             <a class="closebtn" href="#">X</a>
           </div>
-
-          <div class="window-content"><p>en paragraph</p>
-            <p>två paragraph</p>
-            <p>tre paragraph</p>
+          <div class="window-content"><p>Standard Window Data</p>
           </div>
-          <div class="window-bottombar">Maybe resize window?</div>
+          <div class="window-bottombar">
+            <span>Test!</span>
+            <img src="image/dragicon.png">
+          </div>
         </div>
+  </template>
+  <template id="chatAppTemp">
+    <div class="messagesDiv">
+      <div class="messages">
+        <p>Let's put messages here.</p>
+      </div>
+    </div>
+    <div class="messageBox">
+      <form>
+          <span class="chatusername">User1:</span>
+          <textarea class="messageText"></textarea>
+          <input type="button" class="messageSendBtn" value="Send">
+      </form>
+    </div>
   </template>
 </head>
 <body>
   <div id="desk-frame">
+    
     <!-- Taskbar -->
     <div id="desk-taskbar">
       <ul>

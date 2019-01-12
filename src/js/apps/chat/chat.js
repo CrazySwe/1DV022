@@ -3,18 +3,21 @@
  * @version 1.0
  */
 import Window from '../../window.js'
+
 export default class Chat extends Window {
   constructor (id, zIndex, deskElement, position) {
-    super(id, 'ChatApp', 'ChatAppContent', zIndex, deskElement, position)
+    super(id, 'ChatApp', zIndex, deskElement, position)
     this.wSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
+    this.APIKey = 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
+    this.username = 'MyFancyUsername'
     this.openSocket()
-    this.content.innerHTML = '<p>ChatRoom #1 of Internet</p>'
 
-    // Test Data
-    for (let i = 0; i < 25; i++) {
-      this.content.innerHTML += '<p>This is a test</p>'
-    }
-    // console.log(this.webSocket)
+    this.chatTemplate = document.querySelector('#chatAppTemp').content.cloneNode(true)
+    this.contentNode.innerHTML = ''
+    this.contentNode.append(this.chatTemplate)
+
+    this.sendMsgHandler = this.sendMessage.bind(this)
+    this.contentNode.querySelector('.messageSendBtn').addEventListener('click', this.sendMsgHandler)
   }
   openSocket () {
     this.wSocket.onopen = this.onOpen.bind(this)
@@ -24,23 +27,19 @@ export default class Chat extends Window {
   }
 
   onOpen (evt) {
-    console.log('WebSocket Opened.')
+    // console.log('WebSocket Opened.')
   }
   onClose (evt) {
-    console.log('WebSocket Closed.')
+    // console.log('WebSocket Closed.')
   }
   onMessage (evt) {
-    console.log(evt.data)
     let msg = JSON.parse(evt.data)
     switch (msg.type) {
       case 'notification':
+        this.addMessage(msg)
         break
       case 'message':
-        if (!msg.channel) {
-          this.content.innerHTML += '<p>' + msg.username + ':' + msg.data + '</p>'
-        } else {
-          this.content.innerHTML += '<p>' + msg.username + '@' + msg.channel + ':' + msg.data + '</p>'
-        }
+        this.addMessage(msg)
         break
       case 'heartbeat':
         break
@@ -51,8 +50,37 @@ export default class Chat extends Window {
     console.log('WebSocket ERROR.')
   }
 
+  addMessage (msg) {
+    let message = document.createElement('p')
+    if (msg.type === 'notification') {
+      message.style.backgroundColor = 'lightyellow'
+    }
+    if (msg.username === 'MyFancyUsername') {
+      message.style.backgroundColor = 'lightblue'
+    }
+    message.innerHTML = `${msg.username}: ${msg.data}`
+    this.contentNode.querySelector('.messages').append(message)
+  }
+
+  sendMessage (evt) {
+    let msgText = this.contentNode.querySelector('.messageText').value
+    this.contentNode.querySelector('.messageText').value = ''
+
+    if (msgText !== '') {
+      let msg = {
+        'username': this.username,
+        'type': 'message',
+        'data': msgText,
+        // 'channel': 'TheSecretChannel#42',
+        'key': this.APIKey
+      }
+      this.wSocket.send(JSON.stringify(msg))
+    }
+  }
+
   destroy () {
     super.destroy()
-    this.wSocket.close()
+    this.wSocket.close(1000, 'AppClose')
+    this.contentNode.querySelector('.messageSendBtn').removeEventListener('click', this.sendMsgHandler)
   }
 }
