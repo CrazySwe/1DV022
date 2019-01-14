@@ -10,7 +10,10 @@
             <span class="window-name">NAMN!</span>
             <a class="closebtn" href="#">X</a>
           </div>
-          <div class="window-content"><p>Standard Window Data</p>
+          <div class="window-content">
+            
+            <p>Default Window Text</p>
+            
           </div>
           <div class="window-bottombar">
             <span>Test!</span>
@@ -21,7 +24,6 @@
   <template id="chatAppTemp">
     <div class="messagesDiv">
       <div class="messages">
-        <p>Let's put messages here.</p>
       </div>
     </div>
     <div class="messageBox">
@@ -31,6 +33,20 @@
           <input type="button" class="messageSendBtn" value="Send">
       </form>
     </div>
+  </template>
+  <template id="chatAppSetUserNameTemp">
+      <div class="overlay">&nbsp;</div>
+      <div id="chatAppSetUsernameDialog">
+          <div class="dialogBox">
+            <div>
+              <form>
+                  <span class="username">Username:</span>
+                  <input type="text" id="setUsernameTxt" name="username">
+                  <input type="button" class="saveUsernameBtn" value="Save">
+                </form>
+              </div>
+            </div>
+      </div>
   </template>
 </head>
 <body>
