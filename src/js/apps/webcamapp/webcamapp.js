@@ -14,7 +14,6 @@ export default class Webcam extends Window {
     this.videoNode = this.videoTemp.querySelector('.video')
 
     this.contentNode.innerHTML = ''
-    console.log('test')
     this.contentNode.append(this.videoTemp)
 
     this.startCam()
@@ -47,5 +46,4 @@ export default class Webcam extends Window {
     this.mediaStream.getVideoTracks()[0].stop()
     super.destroy()
   }
-  // What to do? Start from scratch or do memory exercise?
 }

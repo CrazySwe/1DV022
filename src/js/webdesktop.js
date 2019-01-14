@@ -20,12 +20,23 @@ export default class WebDesktop {
     this.focusedWindow = null
   }
 
+  /**
+   * Starts the event listeners on the desktop
+   *
+   * @memberof WebDesktop
+   */
   run () {
     document.addEventListener('mousedown', this.mouseDown.bind(this))
     document.addEventListener('resize', this.onDeskResize.bind(this))
     document.addEventListener('click', this.mouseClick.bind(this))
   }
 
+  /**
+   * Handles the mouseclick on the desktop to start the applications
+   *
+   * @param {MouseEvent} event
+   * @memberof WebDesktop
+   */
   mouseClick (event) {
     if (event.target.tagName === 'LI') {
       let pos = new Point2D(50 + 15 * this.idCount, 50 + 15 * this.idCount)
@@ -43,6 +54,12 @@ export default class WebDesktop {
     }
   }
 
+  /**
+   * Handles any mouse activity on the windows that are open
+   *
+   * @param {*} event
+   * @memberof WebDesktop
+   */
   mouseDown (event) {
     // Identify window correctly here
     if (event.target.closest('.window') != null) {
@@ -61,6 +78,11 @@ export default class WebDesktop {
     }
   }
 
+  /**
+   * Handles the resize of the desktop
+   *  //TODO!
+   * @memberof WebDesktop
+   */
   onDeskResize () {
     /**
      * foreach window
@@ -72,6 +94,12 @@ export default class WebDesktop {
     console.log('Someone changed the size of the desk!')
   }
 
+  /**
+   * Puts the window on top to focus on
+   *
+   * @param {Window} element - Window element
+   * @memberof WebDesktop
+   */
   setfocus (element) {
     // remove class activewindow on old
     this.focusedWindow = element

@@ -5,6 +5,14 @@
 import Window from '../../window.js'
 
 export default class Chat extends Window {
+  /**
+   *Creates an instance of ChatApplication
+   * @param {*} id
+   * @param {*} zIndex
+   * @param {*} deskElement
+   * @param {*} position
+   * @memberof Chat
+   */
   constructor (id, zIndex, deskElement, position) {
     super(id, 'ChatApp', zIndex, deskElement, position)
     this.wSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
@@ -27,6 +35,12 @@ export default class Chat extends Window {
     // Open and start the chat
     this.openSocket()
   }
+
+  /**
+   * Opens the webSocket event handlers
+   *
+   * @memberof Chat
+   */
   openSocket () {
     this.wSocket.onopen = this.onOpen.bind(this)
     this.wSocket.onclose = this.onClose.bind(this)
@@ -34,12 +48,32 @@ export default class Chat extends Window {
     this.wSocket.onerror = this.onError.bind(this)
   }
 
+  /**
+   * Handles the event onOpen on websocket
+   *
+   * @param {*} evt
+   * @memberof Chat
+   */
   onOpen (evt) {
     // console.log('WebSocket Opened.')
   }
+
+  /**
+   * Handles the closing of the websocket
+   *
+   * @param {*} evt
+   * @memberof Chat
+   */
   onClose (evt) {
     // console.log('WebSocket Closed.')
   }
+
+  /**
+   * Handles the messages received on the websocket
+   *
+   * @param {*} evt
+   * @memberof Chat
+   */
   onMessage (evt) {
     let msg = JSON.parse(evt.data)
     switch (msg.type) {
@@ -54,10 +88,23 @@ export default class Chat extends Window {
       default:
     }
   }
+
+  /**
+   * Handles any errors from the websocket
+   *
+   * @param {*} evt
+   * @memberof Chat
+   */
   onError (evt) {
     console.log('WebSocket ERROR.')
   }
 
+  /**
+   * Adds a message to the chat window
+   *
+   * @param {*} msg
+   * @memberof Chat
+   */
   addMessage (msg) {
     let message = document.createElement('p')
     if (msg.type === 'notification') {
@@ -74,6 +121,12 @@ export default class Chat extends Window {
     this.contentNode.querySelector('.messages').append(message)
   }
 
+  /**
+   * Sends message through the websocket
+   *
+   * @param {*} evt
+   * @memberof Chat
+   */
   sendMessage (evt) {
     let msgText = this.contentNode.querySelector('.messageText').value
     this.contentNode.querySelector('.messageText').value = ''
@@ -90,6 +143,11 @@ export default class Chat extends Window {
     }
   }
 
+  /**
+   * Adds the menu on the window
+   *
+   * @memberof Chat
+   */
   addMenu () {
     let menu = document.createElement('div')
     let button = document.createElement('a')
@@ -104,6 +162,12 @@ export default class Chat extends Window {
     this.element.insertBefore(menu, this.contentNode)
   }
 
+  /**
+   * Gets any saved username else opens the dialog for setting a username
+   *
+   * @returns
+   * @memberof Chat
+   */
   getUsername () {
     let name = window.localStorage.getItem(this.storageName)
     if (name === null) {
@@ -113,6 +177,11 @@ export default class Chat extends Window {
     return name
   }
 
+  /**
+   * Saves the username set
+   *
+   * @memberof Chat
+   */
   saveUsername () {
     let name = this.contentNode.querySelector('#setUsernameTxt').value
 
@@ -127,6 +196,11 @@ export default class Chat extends Window {
     }
   }
 
+  /**
+   * Opens the username setting dialog
+   *
+   * @memberof Chat
+   */
   openUsernameDialog () {
     let dialog = document.querySelector('#chatAppSetUserNameTemp').content.cloneNode(true)
     dialog.querySelector('.saveUsernameBtn').addEventListener('click', this.saveUsernameHandler)
@@ -134,6 +208,11 @@ export default class Chat extends Window {
     this.contentNode.append(dialog)
   }
 
+  /**
+   * Handles the destruction of the websocket chat and entire window
+   *
+   * @memberof Chat
+   */
   destroy () {
     super.destroy()
     this.wSocket.close(1000, 'AppClose')
