@@ -128,7 +128,6 @@ export default class Chat extends Window {
   }
 
   openUsernameDialog () {
-    // Open dialog for saving username
     let dialog = document.querySelector('#chatAppSetUserNameTemp').content.cloneNode(true)
     dialog.querySelector('.saveUsernameBtn').addEventListener('click', this.saveUsernameHandler)
 

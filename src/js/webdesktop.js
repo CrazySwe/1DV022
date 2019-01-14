@@ -2,10 +2,10 @@
  * @author Kevin Cederholm
  * @version 1.0
  */
-import Window from './window.js'
 import Point2D from './point2d.js'
 import Memory from './apps/memory/memory.js'
 import Chat from './apps/chat/chat.js'
+import Webcam from './apps/webcamapp/webcamapp.js'
 
 export default class WebDesktop {
   /**
@@ -30,8 +30,8 @@ export default class WebDesktop {
     if (event.target.tagName === 'LI') {
       let pos = new Point2D(50 + 15 * this.idCount, 50 + 15 * this.idCount)
       switch (event.target.attributes.value.value) {
-        case 'valfri':
-          this.windows.push(new Window(this.idCount++, 'valfriapp', this.zCount++, this.desktopElement, pos))
+        case 'webcamapp':
+          this.windows.push(new Webcam(this.idCount++, this.zCount++, this.desktopElement, pos))
           break
         case 'memoryapp':
           this.windows.push(new Memory(this.idCount++, this.zCount++, this.desktopElement, pos))

@@ -65,6 +65,9 @@ export default class Window {
     let halfWidth = this.element.clientWidth / 2
     let halfHeigth = this.element.clientWidth / 2
 
+    if (pos.x < 0) { pos.x = 0 }
+    if (pos.y < 0) { pos.y = 0 }
+
     if (pos.x >= 0 && pos.x <= (window.innerWidth - halfWidth)) {
       this.element.style.left = pos.x + 'px'
     }
