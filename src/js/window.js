@@ -7,11 +7,11 @@ import Point2D from './point2d.js'
 export default class Window {
   /**
    * Creates an instance of Window.
-   * @param {String} id
-   * @param {*} name
-   * @param {*} zIndex
-   * @param {*} deskElement
-   * @param {*} position
+   * @param {number} id
+   * @param {string} name
+   * @param {number} zIndex
+   * @param {HTMLElement} deskElement
+   * @param {Point2D} position
    * @memberof Window
    */
   constructor (id, name, zIndex, deskElement, position) {

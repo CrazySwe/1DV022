@@ -7,10 +7,10 @@ import Window from '../../window.js'
 export default class Chat extends Window {
   /**
    *Creates an instance of ChatApplication
-   * @param {*} id
-   * @param {*} zIndex
-   * @param {*} deskElement
-   * @param {*} position
+   * @param {number} id
+   * @param {number} zIndex
+   * @param {HTMLElement} deskElement
+   * @param {Point2D} position
    * @memberof Chat
    */
   constructor (id, zIndex, deskElement, position) {
