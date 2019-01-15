@@ -1,6 +1,7 @@
 /**
  * @author Kevin Cederholm
  * @version 1.0
+ * TODO: 1. Fix styling
  */
 import Window from '../../window.js'
 

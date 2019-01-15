@@ -1,6 +1,7 @@
 /**
  * @author Kevin Cederholm
  * @version 1.0
+ * TODO: 1.Add filter controls of cam 2. Ability to snap pictures
  */
 import Window from '../../window.js'
 import Point2D from '../../point2d.js'

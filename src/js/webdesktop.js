@@ -38,7 +38,6 @@ export default class WebDesktop {
    * @memberof WebDesktop
    */
   mouseClick (event) {
-    // event.target.closest('.window') != null
     if ((event.target.tagName === 'IMG' || event.target.tagName === 'LI') && event.target.closest('#desk-taskbar') !== null) {
       let value = ''
       if (event.target.tagName === 'IMG') {
