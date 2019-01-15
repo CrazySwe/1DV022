@@ -66,7 +66,9 @@ export default class Webcam extends Window {
    * @memberof Webcam
    */
   destroy () {
-    this.mediaStream.getVideoTracks()[0].stop()
+    if (this.mediaStream) {
+      this.mediaStream.getVideoTracks()[0].stop()
+    }
     super.destroy()
   }
 }
