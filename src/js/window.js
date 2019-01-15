@@ -14,9 +14,10 @@ export default class Window {
    * @param {Point2D} position
    * @memberof Window
    */
-  constructor (id, name, zIndex, deskElement, position) {
+  constructor (id, name, zIndex, deskElement, position, iconPath) {
     this.element = document.querySelector('#windowtemp').content.cloneNode(true)
     this.id = 'win' + id
+    this.iconPath = iconPath
     this.name = name
     this.zIndex = zIndex
     this.offset = new Point2D(0, 0)
@@ -42,7 +43,12 @@ export default class Window {
    */
   init () {
     this.element.querySelector('.window').id = this.id
-    this.element.querySelector('.window-name').textContent = this.name
+
+    let icon = document.createElement('img')
+    icon.src = this.iconPath
+    this.element.querySelector('.window-topbar').prepend(icon)
+
+    this.element.querySelector('.window-name').textContent += this.name
     this.element.querySelector('.window').style.top = this.position.y + 'px'
     this.element.querySelector('.window').style.left = this.position.x + 'px'
     this.element.querySelector('.window').style.zIndex = this.zIndex

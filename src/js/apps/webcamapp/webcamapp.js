@@ -15,7 +15,7 @@ export default class Webcam extends Window {
    * @memberof Webcam
    */
   constructor (id, zIndex, deskElement, position) {
-    super(id, 'Webcamapp', zIndex, deskElement, position)
+    super(id, 'Webcamapp', zIndex, deskElement, position, './image/webcamicon_16.png')
     this.setWindowSize(new Point2D(500, 400))
 
     this.videoTemp = document.querySelector('#videoTemplate').content.cloneNode(true)

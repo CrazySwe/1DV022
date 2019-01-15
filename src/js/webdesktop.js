@@ -38,9 +38,17 @@ export default class WebDesktop {
    * @memberof WebDesktop
    */
   mouseClick (event) {
-    if (event.target.tagName === 'LI') {
+    // event.target.closest('.window') != null
+    if ((event.target.tagName === 'IMG' || event.target.tagName === 'LI') && event.target.closest('#desk-taskbar') !== null) {
+      let value = ''
+      if (event.target.tagName === 'IMG') {
+        value = event.target.parentNode.attributes.value.value
+      } else {
+        value = event.target.attributes.value.value
+      }
+
       let pos = new Point2D(50 + 15 * this.idCount, 50 + 15 * this.idCount)
-      switch (event.target.attributes.value.value) {
+      switch (value) {
         case 'webcamapp':
           this.windows.push(new Webcam(this.idCount++, this.zCount++, this.desktopElement, pos))
           break
@@ -62,7 +70,7 @@ export default class WebDesktop {
    */
   mouseDown (event) {
     // Identify window correctly here
-    if (event.target.closest('.window') != null) {
+    if (event.target.closest('.window') !== null) {
       let winIndex = 0
       for (let i = 0; i < this.windows.length && winIndex != null; i++) {
         if (event.target.closest('#' + this.windows[i].id) != null) {

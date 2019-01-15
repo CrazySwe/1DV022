@@ -14,7 +14,7 @@ export default class Chat extends Window {
    * @memberof Chat
    */
   constructor (id, zIndex, deskElement, position) {
-    super(id, 'ChatApp', zIndex, deskElement, position)
+    super(id, 'ChatApp', zIndex, deskElement, position, './image/chatappicon_16.png')
     this.wSocket = new window.WebSocket('ws://vhost3.lnu.se:20080/socket/')
     this.APIKey = 'eDBE76deU7L0H9mEBgxUKVR0VCnq0XBd'
 
@@ -28,6 +28,7 @@ export default class Chat extends Window {
     this.username = this.getUsername()
     this.chatTemplate.querySelector('.chatusername').innerText = this.username + ':'
     this.contentNode.append(this.chatTemplate)
+    this.contentNode.querySelector('.messageText').focus()
 
     this.sendMsgHandler = this.sendMessage.bind(this)
     this.contentNode.querySelector('.messageSendBtn').addEventListener('click', this.sendMsgHandler)

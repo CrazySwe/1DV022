@@ -8,12 +8,13 @@ import MemoryGame from './memorygame.js'
 
 export default class Memory extends Window {
   constructor (id, zIndex, deskElement, position) {
-    super(id, 'Memory', zIndex, deskElement, position)
+    super(id, 'Memory', zIndex, deskElement, position, './image/memoryappicon_16.png')
     this.minSize = new Point2D(4 * 70, 4 * 70)
     this.clickHandler = this.clickCard.bind(this)
-    this.game = new MemoryGame(new Point2D(2, 2))
+    this.game = new MemoryGame(new Point2D(4, 4))
     this.clickedID = null
     this.cardMatches = 0
+    this.attempts = 0
 
     this.contentNode.innerHTML = ''
     this.contentNode.addEventListener('click', this.clickHandler)
@@ -47,17 +48,16 @@ export default class Memory extends Window {
       } else if (event.target.id !== this.clickedID) {
         if (this.game.board[event.target.id] === this.game.board[this.clickedID]) {
           this.cardMatches++
-          console.log('its a match!')
         } else {
           this.resetCard(this.clickedID)
           this.resetCard(event.target.id)
-          console.log('its not a match!')
         }
+        this.attempts++
         this.clickedID = null
       }
 
       if (this.cardMatches >= this.game.nrOfCards / 2) {
-        console.log('gameend')
+        console.log(`Finished at ${this.attempts} match attempts.`)
       }
     }
   }
