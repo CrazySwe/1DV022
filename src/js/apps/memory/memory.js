@@ -67,17 +67,25 @@ export default class Memory extends Window {
       if (this.clickedID === null) {
         this.clickedID = event.target.id
       } else if (event.target.id !== this.clickedID) {
+        this.contentNode.removeEventListener('click', this.clickHandler)
+
         if (this.game.board[event.target.id] === this.game.board[this.clickedID]) {
           this.cardMatches++
+          this.contentNode.addEventListener('click', this.clickHandler)
         } else {
-          this.resetCard(this.clickedID)
-          this.resetCard(event.target.id)
+          let clicked = this.clickedID
+          setTimeout(() => {
+            this.resetCard(clicked)
+            this.resetCard(event.target.id)
+            this.contentNode.addEventListener('click', this.clickHandler)
+          }, 500)
         }
         this.attempts++
         this.clickedID = null
       }
 
       if (this.cardMatches >= this.game.nrOfCards / 2) {
+        this.contentNode.removeEventListener('click', this.clickHandler)
         let messageElement = document.createElement('h2')
         messageElement.innerText = `Finished at ${this.attempts} match attempts.`
         this.contentNode.append(messageElement)
@@ -92,11 +100,9 @@ export default class Memory extends Window {
    * @memberof Memory
    */
   resetCard (id) {
-    setTimeout(() => {
-      let elemNode = this.contentNode.querySelector(`[id='${id}']`)
-      elemNode.src = 'js/apps/memory/images/0.png'
-      elemNode.dataset.flipped = 0
-    }, 500)
+    let elemNode = this.contentNode.querySelector(`[id='${id}']`)
+    elemNode.src = 'js/apps/memory/images/0.png'
+    elemNode.dataset.flipped = 0
   }
 
   /**

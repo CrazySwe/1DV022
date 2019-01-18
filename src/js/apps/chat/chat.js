@@ -116,9 +116,9 @@ export default class Chat extends Window {
       message.style.backgroundColor = 'lightblue'
     }
     if (msg.channel) {
-      message.innerHTML = `${msg.username}@${msg.channel}: ${msg.data}`
+      message.textContent = `${msg.username}@${msg.channel}: ${msg.data}`
     } else {
-      message.innerHTML = `${msg.username}: ${msg.data}`
+      message.textContent = `${msg.username}: ${msg.data}`
     }
     this.contentNode.querySelector('.messages').append(message)
   }
