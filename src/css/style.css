@@ -1,0 +1,125 @@
+* {
+  margin: 0;
+  padding: 0;
+ 
+}
+
+body {
+  background-image:url("/image/deskbackground.jpg");
+  overflow:hidden;
+  font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+/* Window */
+.window {
+  border:solid 2px #000000;
+  border-radius: 3px;
+  background-color:white;
+  border-radius: 2px;
+  display:inline-block;
+  position: absolute;
+  
+}
+.window-topbar {
+  padding:2px;
+  background-color:gray;
+  
+  height:20px;
+}
+.window-menu {
+  padding:2px;
+  background-color:lightgray;
+  height:20px;
+}
+
+.window-content {
+  padding:2px;
+  overflow: auto;
+  word-wrap:break-word;
+}
+
+.window-bottombar {
+  padding:2px;
+  height:15px;
+  background-color:lightgray;
+  -moz-user-select: none;
+}
+
+
+.window-resizebtn {
+  background-image: url("../image/dragicon.png");
+  height: 15px;
+  width:15px;
+  cursor: nw-resize;
+  float:right;
+}
+
+.closebtn {
+  float:right;
+}
+
+/* Taskbar */
+
+#desk-taskbar {
+  background-color:rgba(0, 0, 0, 0.7);
+  color:white;
+  position: absolute;
+  left:0;
+  right:0;
+  margin:auto;
+  bottom:0;
+  z-index: 99999;
+  width:300px;
+  text-align:center;
+}
+
+#desk-taskbar ul {
+  list-style-type: none;
+}
+#desk-taskbar ul li{
+  padding:10px;
+  display: inline-block;
+}
+#desk-taskbar ul li:hover{
+  background-color:rgba(255, 255, 255, 0.3);
+  padding: 10px;
+  display: inline-block;
+}
+
+
+
+/* ChatApp */
+.overlay {
+  position: absolute;
+  height: 100%;
+  width:100%;
+  top:0;
+  left:0;
+  opacity: 0.5;
+  background-color:black;
+  z-index: 999;
+}
+.dialogBox {
+  position: absolute;
+  top:50%;
+  left:50%;
+  transform: translate(-50%, -50%);
+  margin:0 auto;
+
+  background-color:white;
+  border:1px solid black;
+  opacity: 1;
+  z-index: 1000;
+ }
+
+#chatAppSetUsernameDialog {
+  z-index: 1000;
+  background-color:green;
+}
+
+
+/* Memory */
+
+/* Maybe next time?*/
+ 
+/* Misc */

@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>My WebDesktop</title>
+  <script type="module" src="js/app.js"></script>
+  <link href="css/style.css" rel="stylesheet" type="text/css">
+  <template id="windowtemp">
+      <div class="window"> 
+          <div class="window-topbar">
+            <span class="window-name"></span>
+            <a class="closebtn" href="#">X</a>
+          </div>
+          <div class="window-content">
+            
+            <p>Default Window Text</p>
+            
+          </div>
+          <div class="window-bottombar">
+            <span class="bottomBarText"></span>
+            <div class="window-resizebtn"></div>
+          </div>
+        </div>
+  </template>
+  <template id="chatAppTemp">
+    <div class="messagesDiv">
+      <div class="messages">
+      </div>
+    </div>
+    <div class="messageBox">
+      <form>
+          <span class="chatusername">User1:</span>
+          <textarea class="messageText"></textarea>
+          <input type="button" class="messageSendBtn" value="Send">
+      </form>
+    </div>
+  </template>
+  <template id="chatAppSetUserNameTemp">
+      <div class="overlay">&nbsp;</div>
+      <div id="chatAppSetUsernameDialog">
+          <div class="dialogBox">
+            <div>
+              <form>
+                  <span class="username">Username:</span>
+                  <input type="text" id="setUsernameTxt" name="username">
+                  <input type="button" class="saveUsernameBtn" value="Save">
+                </form>
+              </div>
+            </div>
+      </div>
+  </template>
+  <template id="videoTemplate">
+    <video autoplay="false" class="video"></video>
+  </template>
+</head>
+<body>
+  <div id="desk-frame">
+    
+    <!-- Taskbar -->
+    <div id="desk-taskbar">
+      <ul>
+        <li value="chatapp"><img src="./image/chatappicon_64.png"><br>Chat</li>
+        <li value="memoryapp"><img src="./image/memoryappicon_64.png"><br>Memory</li>
+        <li value="webcamapp"><img src="./image/webcamicon_64.png"><br>Webcam</li>
+      </ul>
+    </div>
+    
+  </div>
+  
+  <script nomodule src="build.js"></script>
+</body>
+</html>
