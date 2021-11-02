@@ -1,0 +1,49 @@
+
+#quizbox {
+    position: absolute;
+    padding:10px;
+    text-align: center;
+    border:1px solid rgba(0, 191, 255, 0.7);
+    min-width:400px;
+    min-height:300px;
+}
+
+input[type=button] {
+    width:100%;
+    margin-top:5px;
+    padding:15px 15px;
+    display:inline-block;
+    font-size: 16px;
+    border:none;
+    color:white;
+    background-color:rgb(0, 120, 160);
+}
+input[type=button]:hover {
+    background-color:rgb(0, 164, 219);
+    cursor:pointer;
+    
+}
+input[type=button]:active {
+    background-color:rgb(0, 142, 189);
+}
+
+input[type=text] { 
+    text-align: center;
+    margin:5px;
+    font-size: 16px;
+}
+
+#highscoretbl {
+    width:100%;
+    text-align: left;
+}
+#highscoretbl tr:nth-child(even) {
+    background-color: rgb(211, 211, 211);
+  }
+  #highscoretbl tr:nth-child(odd) {
+    background-color: rgb(255, 255, 255);
+  }
+  #highscoretbl th {
+    color: white;
+    background-color: rgb(0, 142, 189);
+  }
